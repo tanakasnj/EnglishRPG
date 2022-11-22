@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "../webApp/js"
+		},
+		{
+			"path": "../webApp/resource"
+		},
+		{
+			"path": "../webApp/css"
+		},
+		{
+			"path": "../webApp"
+		}
+	]
+}

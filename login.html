@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" type="text/css" href="css/login.css">
+  <title>ログイン</title>
+</head>
+<script type="text/javascript" src="js/ncmb.min.js" charset="utf-8"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="js/login.js"></script>
+
+
+
+<body>
+  
+    <h1 class="titleText">英単語ローグライク管理者ページ</h1>
+    <div class="login">
+        
+        <div class="login-triangle"></div>
+
+    <h2 class="login-header">Log in</h2>
+        <form name="login_form" class="login-container">
+          <p id="errMsg"></p>
+        <p><input type="id" name="id" placeholder="ID" id="id"></p>
+        <p><input type="password" name="pass" placeholder="Password" id="pass"onchange="nextPage()"></p>
+        <p><input type="button" onClick="nextPage();"value="ログイン" class="btnColor"></button></p>
+  </form>
+</div>
+
+  
+ 
+ 
+</body>
+
+</html>
