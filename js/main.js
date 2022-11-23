@@ -23,7 +23,7 @@ $('#logoutButton').on('click', function() {
 
   //登録ユーザーを読み込んで表示
   var user = ncmb.User;
-  user.equalTo("role", undefined)
+  user.equalTo("role", 0)
     .fetchAll()
     .then(function (results) {
       console.log("Successfully retrieved " + results.length + " scores.");
