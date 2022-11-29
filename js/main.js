@@ -43,7 +43,6 @@ $(function () {
 
   //ユーザーをクリックしたときのイベント
   $('body').on('click', '.clickuser', function () {
-    var userId = $(this).prop("id");
     var userName = $(this).text();
     var ans1 = 0;//正解数
     var playTime = 0; //プレイ時間
