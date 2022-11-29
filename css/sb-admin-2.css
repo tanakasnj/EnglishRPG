@@ -11333,3 +11333,30 @@ li:before{
   border-radius:  50%;        /* 要素を丸くする */
   margin-right: 5px;
 }
+
+
+/*その他と主な共通部分は省略*/
+
+.period{
+  display: flex;
+}
+.period label{
+  display: block;
+  width: 150px;
+  background: #94D6DA;
+  color: #000;
+  padding: 10px;
+  margin: 10px;
+  box-sizing: border-box;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
+.period input:checked+label{
+  background: #007DC5;
+  color: #FFF;
+}
+.period input{
+  display: none;
+}

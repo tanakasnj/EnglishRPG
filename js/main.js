@@ -54,6 +54,7 @@ $(function () {
     var genreTime = {};
     var genreTrue = {};
     var genreName;
+    
 
 
     //選択されたユーザー名を表示
