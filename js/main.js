@@ -43,14 +43,14 @@ $(function () {
 
   //ユーザーをクリックしたときのイベント
   $('body').on('click', '.clickuser', function () {
-   exdata($(this).prop("id"),$(this).text(),1);
+    exdata($(this).prop("id"), $(this).text(), 1);
   });
 
 
-  function exdata(thisUser,thisName,thisPeriod){
+  function exdata(thisUser, thisName, thisPeriod) {
     var userId = thisUser;
     var userName = thisName;
-    var period =thisPeriod;
+    var period = thisPeriod;
     var ans1 = 0;//正解数
     var playTime = 0; //プレイ時間
     var playDays = {};//プレイした日にち
@@ -116,22 +116,17 @@ $(function () {
             }
             genreTime[object.genreId] = object.time;
           }
+        }
+        //for文終わり
 
-
-
-          //正答率変化
+        //正答率変化のグラフ描画
         $("#nChart").children().remove();
         $("#nChart").append('<canvas id="myAreaChart"></canvas>');
-         nNum = ["1回目","2回目","3回目"];
-         nPer = [10,20,64];
-         
+        nNum = ["1回目", "2回目", "3回目"];
+        nPer = [10, 20, 64];
+
         drowchart();
 
-          
-
-
-
-        }
         //プレイ時間を表示
         let hour = Math.floor(playTime / 3600);
         let min = Math.floor(playTime % 3600 / 60);
@@ -162,7 +157,9 @@ $(function () {
               }
               let rate = Math.round(genreTrue[key] / genre[key] * 100);
               console.log('key:' + key + ' value:' + genre[key] + "time:" + genreTime[key] + "rate" + rate + "name" + genreName);
-              $("#table").append("<tr><td>" + key + ":" + genreName + "</td><td>" + genre[key] + "問</td><td>" + genreTime[key] + "分</td><td>" + rate + "%</td></tr>");
+              let min = Math.floor(genreTime[key] / 60);
+              let rem = genreTime[key] % 60;
+              $("#table").append("<tr><td>" + key + ":" + genreName + "</td><td>" + genre[key] + "問</td><td>"+min+"分"+rem+"秒</td><td>" + rate + "%</td></tr>");
             })
         }
 
