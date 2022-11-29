@@ -1,3 +1,4 @@
+function drowchart(){
 // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
@@ -32,7 +33,7 @@ var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ["1",2,3,4,5],
+    labels: nNum,
     datasets: [{
       label: "正答率",
       lineTension: 0.3,
@@ -46,7 +47,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBorderColor: "rgba(78, 115, 223, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: [20, 30, 25, 50,90],
+      data: nPer,
     }],
   },
   options: {
@@ -116,3 +117,4 @@ var myLineChart = new Chart(ctx, {
     }
   }
 });
+}
