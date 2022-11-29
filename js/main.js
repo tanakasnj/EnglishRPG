@@ -43,7 +43,14 @@ $(function () {
 
   //ユーザーをクリックしたときのイベント
   $('body').on('click', '.clickuser', function () {
-    var userName = $(this).text();
+   exdata($(this).prop("id"),$(this).text(),1);
+  });
+
+
+  function exdata(thisUser,thisName,thisPeriod){
+    var userId = thisUser;
+    var userName = thisName;
+    var period =thisPeriod;
     var ans1 = 0;//正解数
     var playTime = 0; //プレイ時間
     var playDays = {};//プレイした日にち
@@ -53,7 +60,6 @@ $(function () {
     var genreTime = {};
     var genreTrue = {};
     var genreName;
-    
 
 
     //選択されたユーザー名を表示
@@ -181,7 +187,7 @@ $(function () {
         console.log(err);
       });
 
-  });
+  }
 
   //カレンダー描画
   const calendarEl = document.querySelector('#calendar');
