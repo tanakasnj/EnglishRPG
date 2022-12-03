@@ -1,5 +1,7 @@
-
 var ncmb = new NCMB("dca3792d3d60fa0f0fb2070bc46a4956b8287f70b2c2aec2aa6449cfe1f82493", "f61ef3dc2e500a0804adb9b33c9488d29727325b1b70ad28ed37517489646fd7");
+
+
+
 var nNum = [1];
 var nPer = [0];
 
@@ -36,6 +38,11 @@ $(function () {
     })
     .catch(function (err) {
       console.log(err);
+      ncmb.User.logout()
+      .then(function () {
+        // ログアウト完了
+        location = 'login.html';
+      })
     });
 
 
@@ -43,14 +50,26 @@ $(function () {
 
   //ユーザーをクリックしたときのイベント
   $('body').on('click', '.clickuser', function () {
-    exdata($(this).prop("id"), $(this).text(), 1);
+    
+    //選択されたユーザー名を表示
+    $(".nowUser").text($(this).text()+ " さんの学習履歴");
+    $(".nowUser").attr('id',$(this).prop("id"));
+    exdata();
   });
 
+  //期間を変更したときのイベント
+  $('input[type=radio][name="period"]').change(function() {
+  if(($(".nowUser").text())!="児童を選択してください"){
+    exdata();
+  }
+   
+});
 
-  function exdata(thisUser, thisName, thisPeriod) {
-    var userId = thisUser;
-    var userName = thisName;
-    var period = thisPeriod;
+
+  function exdata() {
+    var userId =  $(".nowUser").attr('id');
+    var period = new Date();
+    var value = $("input[type=radio][name=period]:checked").val();
     var ans1 = 0;//正解数
     var playTime = 0; //プレイ時間
     var playDays = {};//プレイした日にち
@@ -61,17 +80,23 @@ $(function () {
     var genreTrue = {};
     var genreName;
 
+    
 
-    //選択されたユーザー名を表示
-    $("#nowUser").text(userName + " さんの学習履歴");
+
+
 
     //表データの削除
     $("#table").children().remove();
 
+    //取得する期間を設定
+    period.setDate(period.getDate() - value);
+    
 
     //選択されたユーザーの解答情報を取得
     var userData = ncmb.DataStore("AnsData");
     userData.equalTo("userID", userId)
+      .greaterThan("createDate",period)
+      .limit(1000)
       .fetchAll()
       .then(function (results) {
         $("#playNum").text(results.length);//解いた問題数を表示
@@ -208,7 +233,7 @@ $(function () {
 
 
 
-//問題数追加処理
+//カレンダーに解いた問題数を表示
 function getEventDatas(playDays) {
   var eventsDates = [];
   for (let key in playDays) {
