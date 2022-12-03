@@ -10509,7 +10509,7 @@ a:focus {
 
 @media (min-width: 768px) {
   .sidebar {
-    width: 20rem !important;
+    width: 15rem !important;
   }
   .sidebar .nav-item .collapse {
     position: relative;
@@ -11324,7 +11324,7 @@ body.sidebar-toggled footer.sticky-footer {
   margin-right:auto;
 }
 
-li:before{
+.clickuser:before{
   content:  "";     /* 空の要素作成 */
   width:  10px;               /* 幅指定 */
   height:  10px;              /* 高さ指定 */
@@ -11333,6 +11333,9 @@ li:before{
   border-radius:  50%;        /* 要素を丸くする */
   margin-right: 5px;
 }
+
+
+
 
 
 /*その他と主な共通部分は省略*/
@@ -11359,4 +11362,11 @@ li:before{
 }
 .period input{
   display: none;
+}
+
+.hreficon{
+  margin-left:auto;
+  margin-right:auto;
+  font-size: 25px;
+  
 }

@@ -44,31 +44,45 @@
                 <div class="sidebar-brand-text mx-3">英単語ローグライク<sup>管理者ページ</sup></div>
             </a>
 
-            
+
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active hreficon">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>ダッシュボード</span></a>
+
+                    <a class="nav-link" href="tables.html">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>解答問題リスト</span></a>
+            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
 
             <!-- Heading -->
-            
-            
+
+
             <div class="wrapperlist">
                 児童一覽
                 <div class="search-area">
-                  <form>
-                    <input type="text" id="search-text" placeholder="検索ワードを入力">
-                  </form>
-                  <div class="search-result">
-                    <div id="search-result__list"></div>
-                  </div>
+                    <form>
+                        <input type="text" id="search-text" placeholder="検索ワードを入力">
+                    </form>
+                    <div class="search-result">
+                        <div id="search-result__list"></div>
+                    </div>
                 </div>
-            
+
                 <ol class="target-area userList sample1">
                 </ol>
-              </div><!-- /.wrapper -->
-            
+            </div><!-- /.wrapper -->
 
-            
+
+
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -77,8 +91,8 @@
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
-            
-            
+
+
 
         </ul>
         <!-- End of Sidebar -->
@@ -97,26 +111,28 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <div><h2>英単語ローグライク管理者ページ</h2></div>
+                    <div>
+                        <h2>英単語ローグライク管理者ページ</h2>
+                    </div>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-                       
+
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="loginUser">test</span>
-                                <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                
+
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal" id="logoutButton">
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal"
+                                    id="logoutButton">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     ログアウト
                                 </a>
@@ -135,13 +151,14 @@
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800 nowUser">児童を選択してください</h1>
 
-                        <div class="period"> 
+                        <div class="period">
                             <input type="radio" checked id="1" name="period" value=10000><label for="1">全期間</label>
-                            <input type="radio" id="2" name="period"value=30><label for="2">一ヶ月</label>
-                            <input type="radio" id="3" name="period"value=7><label for="3">一週間</label>
-                            <input type="radio" id="4" name="period"value=1><label for="4">一日</label></div>
+                            <input type="radio" id="2" name="period" value=30><label for="2">一ヶ月</label>
+                            <input type="radio" id="3" name="period" value=7><label for="3">一週間</label>
+                            <input type="radio" id="4" name="period" value=1><label for="4">一日</label>
+                        </div>
                     </div>
-                  
+
 
                     <!-- Content Row -->
                     <div class="row">
@@ -156,7 +173,7 @@
                                                 総プレイ時間</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800" id="playTime">0</div>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -172,7 +189,7 @@
                                                 解いた単語数</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800" id="playNum">0</div>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -188,13 +205,14 @@
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" id="rate">0%</div>
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" id="rate">
+                                                        0%</div>
                                                 </div>
-                                                
+
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -209,10 +227,11 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                 進捗</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="progress">0/878 問</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="progress">0/878 問
+                                            </div>
                                         </div>
                                         <div class="col-auto">
-                                           
+
                                         </div>
                                     </div>
                                 </div>
@@ -224,9 +243,9 @@
 
                     <div class="row">
 
-                         
 
-                        
+
+
                         <div class="col-xl-8 col-lg-7">
 
                             <!-- 正答率の変化記録 -->
@@ -235,11 +254,11 @@
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">正答率の変化記録</h6>
-                                    
+
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
-                                    <div class="chart-area"id="nChart">
+                                    <div class="chart-area" id="nChart">
                                         <canvas id="myAreaChart"></canvas>
                                     </div>
                                 </div>
@@ -247,21 +266,21 @@
 
 
                             <!-- カレンダー表示-->
-                        <div class="card shadow mb-4">
-                            <!-- Card Header - Dropdown -->
-                            <div
-                                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">日ごとの学習状況</h6>
-                                
-                            </div>
-                            <!-- Card Body -->
-                            <div class="card-body">
-                                <div id="calendar">
-                                    
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">日ごとの学習状況</h6>
+
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div id="calendar">
+
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    
+
                         </div>
 
                         <!-- ジャンルごと正解率 -->
@@ -271,7 +290,7 @@
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">ジャンルごとの学習状況</h6>
-                                    
+
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
@@ -285,9 +304,9 @@
                                                     <th>正解率</th>
                                                 </tr>
                                             </thead>
-                                            
+
                                             <tbody id="table">
-                                                
+
 
 
                                             </tbody>
@@ -298,9 +317,9 @@
                         </div>
                     </div>
 
-                    
-                  
-                
+
+
+
                 </div>
                 <!-- /.container-fluid -->
 
@@ -328,8 +347,8 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    
-    
+
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>

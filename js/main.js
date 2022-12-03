@@ -39,10 +39,10 @@ $(function () {
     .catch(function (err) {
       console.log(err);
       ncmb.User.logout()
-      .then(function () {
-        // ログアウト完了
-        location = 'login.html';
-      })
+        .then(function () {
+          // ログアウト完了
+          location = 'login.html';
+        })
     });
 
 
@@ -50,24 +50,24 @@ $(function () {
 
   //ユーザーをクリックしたときのイベント
   $('body').on('click', '.clickuser', function () {
-    
+
     //選択されたユーザー名を表示
-    $(".nowUser").text($(this).text()+ " さんの学習履歴");
-    $(".nowUser").attr('id',$(this).prop("id"));
+    $(".nowUser").text($(this).text() + " さんの学習履歴");
+    $(".nowUser").attr('id', $(this).prop("id"));
     exdata();
   });
 
   //期間を変更したときのイベント
-  $('input[type=radio][name="period"]').change(function() {
-  if(($(".nowUser").text())!="児童を選択してください"){
-    exdata();
-  }
-   
-});
+  $('input[type=radio][name="period"]').change(function () {
+    if (($(".nowUser").text()) != "児童を選択してください") {
+      exdata();
+    }
+
+  });
 
 
   function exdata() {
-    var userId =  $(".nowUser").attr('id');
+    var userId = $(".nowUser").attr('id');
     var period = new Date();
     var value = $("input[type=radio][name=period]:checked").val();
     var ans1 = 0;//正解数
@@ -79,8 +79,15 @@ $(function () {
     var genreTime = {};
     var genreTrue = {};
     var genreName;
+    //正答率の変化記録
+    var countMax = {};
+    var countNum = [];
+    var countTrue = [];
+    var nNum2=[];
+    var nPer2=[];
 
-    
+
+
 
 
 
@@ -90,12 +97,13 @@ $(function () {
 
     //取得する期間を設定
     period.setDate(period.getDate() - value);
-    
+
 
     //選択されたユーザーの解答情報を取得
     var userData = ncmb.DataStore("AnsData");
     userData.equalTo("userID", userId)
-      .greaterThan("createDate",period)
+      .greaterThan("createDate", period)
+      .order("createDate", false)
       .limit(1000)
       .fetchAll()
       .then(function (results) {
@@ -141,14 +149,62 @@ $(function () {
             }
             genreTime[object.genreId] = object.time;
           }
+
+
+          //正答率の変化記録
+          //2回め以降
+          if (object.quesID in countMax) {
+
+            if (countNum[countMax[object.quesID]] === undefined) {
+              countNum[countMax[object.quesID]] = 1;
+            }
+            else {
+              countNum[countMax[object.quesID]] = countNum[countMax[object.quesID]] + 1;
+            }
+            if (object.ans == 1) {
+              if (countTrue[countMax[object.quesID]] === undefined) {
+                countTrue[countMax[object.quesID]] = 1;
+              }
+              else {
+                countTrue[countMax[object.quesID]] = countTrue[countMax[object.quesID]] + 1;
+              }
+            }
+            countMax[object.quesID] = countMax[object.quesID] + 1;//回答数
+          }
+
+          //初回
+          else {
+            countMax[object.quesID] = 1;
+            if (countNum.length === 0) {
+              countNum[0] = 1;
+            }
+            countNum[0] = countNum[0] + 1;
+            if (object.ans == 1) {
+              if (countTrue.length === 0) {
+                countTrue[0] = 1;
+              }
+              countTrue[0] = countTrue[0] + 1;
+            }
+          }
         }
         //for文終わり
 
         //正答率変化のグラフ描画
+        console.log(countNum);
+        console.log(countTrue);
+        for (var n = 0; n < countNum.length; n++) {
+          if(countNum[n]>10){
+            console.log(n);
+            nNum2.push(n+1+"回目");
+            nPer2.push(countTrue[n]/countNum[n]*100);
+          }
+          
+        }
+
         $("#nChart").children().remove();
         $("#nChart").append('<canvas id="myAreaChart"></canvas>');
-        nNum = ["1回目", "2回目", "3回目"];
-        nPer = [10, 20, 64];
+        nNum = nNum2;
+        nPer = nPer2;
 
         drowchart();
 
@@ -184,7 +240,7 @@ $(function () {
               console.log('key:' + key + ' value:' + genre[key] + "time:" + genreTime[key] + "rate" + rate + "name" + genreName);
               let min = Math.floor(genreTime[key] / 60);
               let rem = genreTime[key] % 60;
-              $("#table").append("<tr><td>" + key + ":" + genreName + "</td><td>" + genre[key] + "問</td><td>"+min+"分"+rem+"秒</td><td>" + rate + "%</td></tr>");
+              $("#table").append("<tr><td>" + key + ":" + genreName + "</td><td>" + genre[key] + "問</td><td>" + min + "分" + rem + "秒</td><td>" + rate + "%</td></tr>");
             })
         }
 
