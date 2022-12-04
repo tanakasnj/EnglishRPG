@@ -4,9 +4,14 @@ var ncmb = new NCMB("dca3792d3d60fa0f0fb2070bc46a4956b8287f70b2c2aec2aa6449cfe1f
 
 var nNum = [1];
 var nPer = [0];
+var data = [];
 
 $(function () {
   drowchart();
+ 
+
+
+
   // カレントユーザー情報の取得
   var currentUser = ncmb.User.getCurrentUser();
   if (currentUser) {
@@ -27,6 +32,7 @@ $(function () {
   //登録ユーザーを読み込んで表示
   var user = ncmb.User;
   user.equalTo("role", 0)
+    .order("userName", false)
     .fetchAll()
     .then(function (results) {
       console.log("Successfully retrieved " + results.length + " scores.");
@@ -83,8 +89,10 @@ $(function () {
     var countMax = {};
     var countNum = [];
     var countTrue = [];
-    var nNum2=[];
-    var nPer2=[];
+    var nNum2 = [];
+    var nPer2 = [];
+
+    
 
 
 
@@ -94,6 +102,8 @@ $(function () {
 
     //表データの削除
     $("#table").children().remove();
+
+
 
     //取得する期間を設定
     period.setDate(period.getDate() - value);
@@ -193,12 +203,12 @@ $(function () {
         console.log(countNum);
         console.log(countTrue);
         for (var n = 0; n < countNum.length; n++) {
-          if(countNum[n]>10){
+          if (countNum[n] > 10) {
             console.log(n);
-            nNum2.push(n+1+"回目");
-            nPer2.push(countTrue[n]/countNum[n]*100);
+            nNum2.push(n + 1 + "回目");
+            nPer2.push(countTrue[n] / countNum[n] * 100);
           }
-          
+
         }
 
         $("#nChart").children().remove();
@@ -240,10 +250,10 @@ $(function () {
               console.log('key:' + key + ' value:' + genre[key] + "time:" + genreTime[key] + "rate" + rate + "name" + genreName);
               let min = Math.floor(genreTime[key] / 60);
               let rem = genreTime[key] % 60;
-              $("#table").append("<tr><td>" + key + ":" + genreName + "</td><td>" + genre[key] + "問</td><td>" + min + "分" + rem + "秒</td><td>" + rate + "%</td></tr>");
+              $("#table").append("<tr><td>" + key + "</td><td>" + genreName + "</td><td>" + genre[key] + "</td><td>" + min + ":" + rem + "</td><td>" + rate + "</td></tr>");
             })
-        }
 
+        }
 
 
 
@@ -260,10 +270,24 @@ $(function () {
         });
 
         calendar.render();
+        console.log(data);
+      
+        /*$('#dataTable').dataTable().fnClearTable();
+        $('#dataTable').dataTable().fnAddData(data);
+        $("#dataTable").DataTable({
+          data: data
+        });*/
+        sort();
+      
+
+
+
       })
-      .catch(function (err) {
-        console.log(err);
-      });
+    
+
+
+
+
 
   }
 
@@ -283,9 +307,8 @@ $(function () {
   calendar.render();
 
 
-
-
 });
+
 
 
 
@@ -320,9 +343,12 @@ $(function () {
         $(this).addClass('hidden');
       }
     });
-  };
 
-  // searchWordの実行
-  $('#search-text').on('input', searchWord);
+    // searchWordの実行
+    $('#search-text').on('input', searchWord);
+
+
+
+  };
 });
 

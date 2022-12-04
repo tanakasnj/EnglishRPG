@@ -9,10 +9,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <script type="text/javascript" src="js/ncmb.min.js" charset="utf-8"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
     <script src="lib/main.js"></script>
     <script src="js/login.js"></script>
     <script src="js/main.js"></script>
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
     <title>英単語ローグライク管理者ページ</title>
 
@@ -55,9 +56,9 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>ダッシュボード</span></a>
 
-                    <a class="nav-link" href="tables.html">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>解答問題リスト</span></a>
+                <a class="nav-link" href="tables.html">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>解答問題リスト</span></a>
             </li>
 
             <!-- Divider -->
@@ -151,7 +152,7 @@
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800 nowUser">児童を選択してください</h1>
 
-                        <div class="period">
+                        <div class="period d-sm-flex mb-4">
                             <input type="radio" checked id="1" name="period" value=10000><label for="1">全期間</label>
                             <input type="radio" id="2" name="period" value=30><label for="2">一ヶ月</label>
                             <input type="radio" id="3" name="period" value=7><label for="3">一週間</label>
@@ -295,13 +296,15 @@
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <table class="table table-bordered sort-table" id="dataTable" width="100%"
+                                            cellspacing="0">
                                             <thead>
                                                 <tr>
+                                                    <th>ID</th>
                                                     <th>ジャンル名</th>
-                                                    <th>解答数</th>
-                                                    <th>学習時間</th>
-                                                    <th>正解率</th>
+                                                    <th>解答数<br>(問)</th>
+                                                    <th>学習時間<br>(分:秒)</th>
+                                                    <th>正解率<br>(%)</th>
                                                 </tr>
                                             </thead>
 
@@ -312,6 +315,7 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    <div id="gridContainer"></div>
                                 </div>
                             </div>
                         </div>
@@ -351,11 +355,11 @@
 
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
+
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
@@ -365,7 +369,8 @@
 
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
+
+
 
 </body>
 
