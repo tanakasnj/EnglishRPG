@@ -23,6 +23,39 @@ $(function () {
             })
     });
 
+    
+    $('#miniTest').click(function() {
+        const doc = new jspdf.jsPDF(); // 注意！jspdf配下から呼ぶ。
+        doc.setFont('mplus-1c-black', 'normal');
+        doc.setFontSize(20);
+        doc.text('英単語小テスト', 85, 10);
+        doc.setFontSize(16);
+        doc.text('名前:test2',150,20);
+        doc.text('1.apple',30,40);
+        doc.text('りんご',115,39);
+        doc.line(110, 40, 180,40); // horizontal line
+        doc.text('2.apple',30,60)
+        doc.text('りんご',115,59)
+        doc.line(110, 60, 180,60);
+        doc.text('3.apple',30,80)
+        doc.text('りんご',115,79)
+        doc.line(110, 80, 180,80);
+        doc.text('4.apple',30,100)
+        doc.text('りんご',115,99)
+        doc.line(110, 100, 180,100);
+        doc.text('5.apple',30,120)
+        doc.text('りんご',115,119)
+        doc.line(110, 120, 180,120);
+        doc.text('6.apple',30,140)
+        doc.text('りんご',115,139)
+        doc.line(110, 140, 180,140);
+        doc.output('dataurlnewwindow', 'minitest.pdf');
+        //doc.save('test.pdf');
+      
+        
+    });
+
+
     //登録ユーザーを読み込んで表示
     var user = ncmb.User;
     user.equalTo("role", 0)
