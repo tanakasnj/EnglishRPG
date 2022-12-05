@@ -277,7 +277,7 @@ $(function () {
         $("#dataTable").DataTable({
           data: data
         });*/
-        sort();
+     
       
 
 

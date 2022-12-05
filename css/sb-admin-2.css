@@ -11372,3 +11372,28 @@ body.sidebar-toggled footer.sticky-footer {
 }
 
 
+.iright{
+  float: right;
+  margin-right:1rem;
+}
+
+
+
+/*grigjs*/
+th.gridjs-th .gridjs-th-content {
+  text-overflow: initial; /* for Firefox */
+}
+
+.gridjs-td {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.gridjs-td:first-child,
+#table3 .gridjs-td:nth-child(-n+2) {
+  text-align: left;
+}
+
+#gridContainer{
+  zoom:90%;
+}

@@ -1,7 +1,8 @@
 var ncmb = new NCMB("dca3792d3d60fa0f0fb2070bc46a4956b8287f70b2c2aec2aa6449cfe1f82493", "f61ef3dc2e500a0804adb9b33c9488d29727325b1b70ad28ed37517489646fd7");
 
+var ansdata=[];
 
-
+                                        
 
 
 $(function () {
@@ -44,6 +45,20 @@ $(function () {
                 })
         });
 
+  
+
+        //gridjs
+        const mygrid=new gridjs.Grid({
+            columns: ['ID', 'ジャンル','英単語','日本語','例文','例文訳','回答数','平均解答時間','正解率'],
+            search: true, // 検索
+            sort: true,  // ソート
+            pagination: { // ページネーション
+              limit: 50,
+            },
+            width: 'auto',
+            data: [],
+          }).render(document.getElementById('gridContainer')); // レンダリングする要素idの指定
+
     searchWord = function () {
         var searchText = $(this).val(), // 検索ボックスに入力された値
             targetText;
@@ -82,92 +97,132 @@ $(function () {
 
     });
 
+   
 
-    function exdata() {
-        var userId = $(".nowUser").attr('id');
-        var period = new Date();
-        var value = $("input[type=radio][name=period]:checked").val();
-        var ques = {};
-        var quesTrue = {};
-        var quesTime = {};
+
+    
 
 
 
 
+function exdata() {
+    var userId = $(".nowUser").attr('id');
+    var period = new Date();
+    var value = $("input[type=radio][name=period]:checked").val();
+    var ques = {};
+    var quesTrue = {};
+    var quesTime = {};
 
-        //取得する期間を設定
-        period.setDate(period.getDate() - value);
+
+    //データリセット
+    mygrid.updateConfig({
+        data: []
+            
+    }).forceRender();
+
+    ansdata=[];
+
+    //取得する期間を設定
+    period.setDate(period.getDate() - value);
 
 
-        //選択されたユーザーの解答情報を取得
-        var userData = ncmb.DataStore("AnsData");
-        userData.equalTo("userID", userId)
-            .greaterThan("createDate", period)
-            .order("createDate", false)
-            .limit(1000)
-            .fetchAll()
-            .then(function (results) {
-                $("#playNum").text(results.length);//解いた問題数を表示
-                for (var i = 0; i < results.length; i++) {
-                    var object = results[i];
-                    //ジャンルごとに記録
-                    if (object.quesID in ques) {
-                        ques[object.quesID] = ques[object.quesID] + 1;//回答数
-                        if (object.ans == 1) {
-                            quesTrue[object.quesID] = quesTrue[object.quesID] + 1;//正解数
-                        }
-                        quesTime[object.quesID] = quesTime[object.quesID] + object.time;//解答時間
-
+    //選択されたユーザーの解答情報を取得
+    var userData = ncmb.DataStore("AnsData");
+    userData.equalTo("userID", userId)
+        .greaterThan("createDate", period)
+        .order("createDate", false)
+        .limit(1000)
+        .fetchAll()
+        .then(function (results) {
+            $("#playNum").text(results.length);//解いた問題数を表示
+            for (var i = 0; i < results.length; i++) {
+                var object = results[i];
+                //ジャンルごとに記録
+                if (object.quesID in ques) {
+                    ques[object.quesID] = ques[object.quesID] + 1;//回答数
+                    if (object.ans == 1) {
+                        quesTrue[object.quesID] = quesTrue[object.quesID] + 1;//正解数
                     }
-                    else {
-                        ques[object.quesID] = 1;
-                        if (object.ans == 1) {
-                            quesTrue[object.quesID] = 1;
-                        }
-                        else {
-                            quesTrue[object.quesID] = 0;
-                        }
-                        quesTime[object.quesID] = object.time;
-                    }
+                    quesTime[object.quesID] = quesTime[object.quesID] + object.time;//解答時間
 
                 }
-                //for文終わり
-                for (let key in ques) {
-                    if (isNaN(key) == false) {
-                        console.log('key:' + key + ' value:' + ques[key]);
+                else {
+                    ques[object.quesID] = 1;
+                    if (object.ans == 1) {
+                        quesTrue[object.quesID] = 1;
+                    }
+                    else {
+                        quesTrue[object.quesID] = 0;
+                    }
+                    quesTime[object.quesID] = object.time;
+                }
+
+            }
+            var count=0;
+            
+            var len = Object.keys(ques).length;
+            console.log(len);
+            //for文終わり
+            for (let key in ques) {
+                if (isNaN(key) == false) {
+                   
+                    var problemtext;
+                    var answertext;
+                    var genreId;
+                    var sentence1;
+                    var sentence2;
+                    var problemData = ncmb.DataStore("problems");
+                    problemData.equalTo("problemId", String(key))
+                        .fetchAll()
+                        .then(function (results) {
+                            console.log(results.length);
+                            for (var i = 0; i < results.length; i++) {
+                                var object = results[i];
+                                //問題文が英→日か日→英どちらかを判定
+                                if (object.problem.match(/[^\x01-\x7E]/) || object.problem.match(/^[0-9]+$/)) {
+                                    // 日本語文字列が含まれている
+                                    //console.log(object.problem+"日本語");
+                                    problemtext=object.problem;
+                                    answertext=object.answer;
+                                    genreId=object.genreId;
+                                    sentence1=object.reibun
+                                    sentence2=object.reibunN
+
+                                } else {
+                                    // 日本語文字列が含まれていない
+                                    //console.log(object.problem+"英語");
+                                }
+                            }
+                        console.log(problemtext);
                         var n = 2;
                         let min = Math.floor(quesTime[key] / ques[key] * Math.pow(10, n)) / Math.pow(10, n);
                         let rate = Math.floor(quesTrue[key] / ques[key] * 100 * Math.pow(10, n)) / Math.pow(10, n);
-                        var problemtext;
-                        var answertext;
-                        var problemData = ncmb.DataStore("problems");
-                        problemData.equalTo("problemId", String(key))
-                            .fetchAll()
-                            .then(function (results) {
-                                console.log(results.length);
-                                for (var i = 0; i < results.length; i++) {
-                                    var object = results[i];
-                                    //問題文が英→日か日→英どちらかを判定
-                                    if (object.problem.match(/[^\x01-\x7E]/) || object.problem.match(/^[0-9]+$/)) {
-                                        // 日本語文字列が含まれている
-                                        console.log(object.problem+"日本語");
-                                        problemtext=object.problem;
-                                        answertext=object.asnwer;
-                                    } else {
-                                        // 日本語文字列が含まれていない
-                                        console.log(object.problem+"英語");
-                                    }
-                                }
-                                $("#table").append("<tr><td>" + key + "</td><td>" + ques[key] + "</td><td>" + min + "</td><td>" + rate + "</td><td>" + problemtext + "</td></tr>");
-                            });
-                                
+                        ansdata.push( [Number(key),Number(genreId),answertext,problemtext,sentence1,sentence2,Number(ques[key]),min,rate],)
+                        count++;
+                        console.log(count);
+                      
+                        if(count==len){
+                            mygrid.updateConfig({
+                                data: ansdata
+                            }).forceRender(); 
                         }
-            
-          }
+                       
+                        })
+                        //console.log(problemtext);
+                       //$("#table").append("<tr><td>" + key + "</td><td>" + ques[key] + "</td><td>" + min + "</td><td>" + rate + "</td><td>" + problemtext + "</td></tr>");
+                       console.log(ansdata);
+                      
+                       
+                    }
+                  
+                    //['問題ID', 'ジャンルID','単語(英)','単語(日)','例文(英)','例文(日)','回答数(問)','平均解答時間(秒)','正解率(%)'],
+                   
+      }
+      
+    
 
-                });
-    }
-
-
+    });
+    
+    
+}
 });
-
