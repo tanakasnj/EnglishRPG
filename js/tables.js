@@ -286,7 +286,7 @@ function intRandom(min, max){
                                 count++;
                                 console.log(count);
 
-                                if (count == len) {
+                                if (count+3 > len) {
                                     mygrid.updateConfig({
                                         data: ansdata
                                     }).forceRender();

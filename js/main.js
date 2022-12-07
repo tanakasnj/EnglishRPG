@@ -8,7 +8,7 @@ var data = [];
 
 $(function () {
   drowchart();
- 
+
 
 
 
@@ -92,7 +92,7 @@ $(function () {
     var nNum2 = [];
     var nPer2 = [];
 
-    
+
 
 
 
@@ -142,7 +142,7 @@ $(function () {
 
           //ジャンルごとに記録
           if (object.genreId in genre) {
-            genre[object.genreId] = genre[object.genreId] + 1;//回答数
+            genre[Number(object.genreId)] = genre[Number(object.genreId)] + 1;//回答数
             if (object.ans == 1) {
               genreTrue[object.genreId] = genreTrue[object.genreId] + 1;//正解数
             }
@@ -150,7 +150,7 @@ $(function () {
 
           }
           else {
-            genre[object.genreId] = 1;
+            genre[Number(object.genreId)] = 1;
             if (object.ans == 1) {
               genreTrue[object.genreId] = 1;
             }
@@ -237,7 +237,9 @@ $(function () {
         delete genreTime.undefined;
         delete genreTrue.undefined;
 
+
         for (let key in genre) {
+          console.log("キー"+key);
           var genreData = ncmb.DataStore("GenreClass");
           genreData.equalTo("genreID", Number(key))
             .fetchAll()
@@ -271,19 +273,19 @@ $(function () {
 
         calendar.render();
         console.log(data);
-      
+
         /*$('#dataTable').dataTable().fnClearTable();
         $('#dataTable').dataTable().fnAddData(data);
         $("#dataTable").DataTable({
           data: data
         });*/
-     
-      
+
+
 
 
 
       })
-    
+
 
 
 
