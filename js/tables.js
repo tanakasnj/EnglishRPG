@@ -2,7 +2,7 @@ var ncmb = new NCMB("dca3792d3d60fa0f0fb2070bc46a4956b8287f70b2c2aec2aa6449cfe1f
 
 var ansdata = [];
 
-var clickFlg = true;
+
 
 
 $(function () {
@@ -167,35 +167,17 @@ function intRandom(min, max){
 
     //ユーザーをクリックしたときのイベント
     $('body').on('click', '.clickuser', function () {
-        if(clickFlg) {
-			// イベント処理中はフラグをoffにします。
-			clickFlg = false;
-            //選択されたユーザー名を表示
-            $(".nowUser").text($(this).text() + " さんの学習履歴");
-            $(".nowUser").attr('id', $(this).prop("id"));
-            $("#roadtext").text("ロード中....");
-            exdata();
-		} 
-     else {
-        // イベント処理中は処理しない
-        console.log("イベント中止")
-        return false;
-    }
+
+        //選択されたユーザー名を表示
+        $(".nowUser").text($(this).text() + " さんの学習履歴");
+        $(".nowUser").attr('id', $(this).prop("id"));
+        exdata();
     });
-        
 
     //期間を変更したときのイベント
     $('input[type=radio][name="period"]').change(function () {
         if (($(".nowUser").text()) != "児童を選択してください") {
-            if(clickFlg) {
-                // イベント処理中はフラグをoffにします。
-                clickFlg = false;
             exdata();
-            }
-        else {
-			// イベント処理中は処理しない
-			return false;
-		}
         }
 
     });
@@ -237,10 +219,7 @@ function intRandom(min, max){
             .limit(1000)
             .fetchAll()
             .then(function (results) {
-                if(results.length==0){
-                    $("#roadtext").text("回答データがありません");
-                    clickFlg = true;
-                }
+                $("#playNum").text(results.length);//解いた問題数を表示
                 for (var i = 0; i < results.length; i++) {
                     var object = results[i];
                     //ジャンルごとに記録
@@ -311,16 +290,14 @@ function intRandom(min, max){
                                     mygrid.updateConfig({
                                         data: ansdata
                                     }).forceRender();
-                                    $("#roadtext").text("");
-                                    clickFlg = true;
                                 }
-
 
                             })
                         //console.log(problemtext);
                         //$("#table").append("<tr><td>" + key + "</td><td>" + ques[key] + "</td><td>" + min + "</td><td>" + rate + "</td><td>" + problemtext + "</td></tr>");
                         console.log(ansdata);
                         
+
                     }
 
                     //['問題ID', 'ジャンルID','単語(英)','単語(日)','例文(英)','例文(日)','回答数(問)','平均解答時間(秒)','正解率(%)'],
@@ -331,7 +308,6 @@ function intRandom(min, max){
 
             });
 
-            
-            
+
     }
 });

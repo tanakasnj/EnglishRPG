@@ -270,7 +270,7 @@ $(function () {
               console.log('key:' + key + ' value:' + genre[key] + "time:" + genreTime[key] + "rate" + rate + "name" + genreName);
               let min = Math.floor(genreTime[key] / 60);
               let rem = genreTime[key] % 60;
-              $("#table").append("<tr><td>" + key + "</td><td>" + genreName + "</td><td>" + genre[key] + "問</td><td>" + min + "分" + rem + "秒</td><td>" + rate + "%</td></tr>");
+              $("#table").append("<tr><td>" + key + "</td><td>" + genreName + "</td><td>" + genre[key] + "</td><td>" + min + ":" + rem + "</td><td>" + rate + "</td></tr>");
             })
 
         }
