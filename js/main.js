@@ -308,28 +308,7 @@ $(function () {
 
   calendar.render();
 
-
-});
-
-
-
-
-//カレンダーに解いた問題数を表示
-function getEventDatas(playDays) {
-  var eventsDates = [];
-  for (let key in playDays) {
-    var datas =
-    {
-      title: playDays[key] + "問",
-      start: key
-    };
-    eventsDates.push(datas)
-  }
-  return eventsDates;
-
-}
-
-//検索ボックス
+  //検索ボックス
 $(function () {
   searchWord = function () {
     var searchText = $(this).val(), // 検索ボックスに入力された値
@@ -353,4 +332,27 @@ $(function () {
 
   };
 });
+
+
+
+});
+
+
+
+
+//カレンダーに解いた問題数を表示
+function getEventDatas(playDays) {
+  var eventsDates = [];
+  for (let key in playDays) {
+    var datas =
+    {
+      title: playDays[key] + "問",
+      start: key
+    };
+    eventsDates.push(datas)
+  }
+  return eventsDates;
+
+}
+
 
