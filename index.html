@@ -8,12 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link href="css/sb-admin-2.css" rel="stylesheet">
     <script type="text/javascript" src="js/ncmb.min.js" charset="utf-8"></script>
     <script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
     <script src="lib/main.js"></script>
     <script src="js/login.js"></script>
     <script src="js/main.js"></script>
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
     <title>英単語ローグライク管理者ページ</title>
 
@@ -24,7 +24,7 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-  
+    <link href="css/sb-admin-2.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="lib/main.css">
 
 </head>
@@ -71,7 +71,7 @@
                 児童一覽
                 <div class="search-area">
                     <form>
-                        <input type="text" id="search-text" placeholder="児童を検索">
+                        <input type="text" id="search-text" placeholder="検索ワードを入力">
                     </form>
                     <div class="search-result">
                         <div id="search-result__list"></div>
@@ -81,6 +81,7 @@
                 <ol class="target-area userList sample1">
                 </ol>
             </div><!-- /.wrapper -->
+
 
 
 
