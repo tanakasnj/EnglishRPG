@@ -147,7 +147,7 @@ function intRandom(min, max){
     searchWord = function () {
         var searchText = $(this).val(), // 検索ボックスに入力された値
             targetText;
-
+        console.log("サーチ");
         $('.target-area li').each(function () {
             targetText = $(this).text();
 

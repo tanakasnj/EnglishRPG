@@ -7,7 +7,7 @@ var nPer = [0];
 var data = [];
 
 $(function () {
-  drowchart();
+
 
 
 
@@ -50,6 +50,11 @@ $(function () {
           location = 'login.html';
         })
     });
+
+  
+ 
+
+  drowchart();
 
 
 
@@ -239,7 +244,7 @@ $(function () {
 
 
         for (let key in genre) {
-          console.log("キー"+key);
+          console.log("キー" + key);
           var genreData = ncmb.DataStore("GenreClass");
           genreData.equalTo("genreID", Number(key))
             .fetchAll()
@@ -309,6 +314,8 @@ $(function () {
   calendar.render();
 
 
+
+
 });
 
 
@@ -329,28 +336,36 @@ function getEventDatas(playDays) {
 
 }
 
-//検索ボックス
-$(function () {
-  searchWord = function () {
-    var searchText = $(this).val(), // 検索ボックスに入力された値
-      targetText;
+//児童を検索(不具合のため別処理に)
+window.addEventListener('DOMContentLoaded', function(){
+  
+  // input要素を取得
+  var input_name = document.getElementById("search-text");
 
-    $('.target-area li').each(function () {
-      targetText = $(this).text();
+  // イベントリスナーでイベント「change」を登録
+  input_name.addEventListener("change",function(){
+    console.log("Change action");
+    console.log(this.value);
+  });
 
-      // 検索対象となるリストに入力された文字列が存在するかどうかを判断
-      if (targetText.indexOf(searchText) != -1) {
-        $(this).removeClass('hidden');
-      } else {
-        $(this).addClass('hidden');
-      }
-    });
-
-    // searchWordの実行
-    $('#search-text').on('input', searchWord);
-
-
-
-  };
+  // イベントリスナーでイベント「input」を登録
+  input_name.addEventListener("input",function(){
+    console.log("Input action");
+    console.log(this.value);
+    
+      var searchText = $(this).val(), // 検索ボックスに入力された値
+        targetText;
+      console.log("サーチ");
+      $('.target-area li').each(function () {
+        targetText = $(this).text();
+  
+        // 検索対象となるリストに入力された文字列が存在するかどうかを判断
+        if (targetText.indexOf(searchText) != -1) {
+          $(this).removeClass('hidden');
+        } else {
+          $(this).addClass('hidden');
+        }
+      });
+    
+  });
 });
-
