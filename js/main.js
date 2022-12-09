@@ -252,7 +252,7 @@ $(function () {
               console.log('key:' + key + ' value:' + genre[key] + "time:" + genreTime[key] + "rate" + rate + "name" + genreName);
               let min = Math.floor(genreTime[key] / 60);
               let rem = genreTime[key] % 60;
-              $("#table").append("<tr><td>" + key + "</td><td>" + genreName + "</td><td>" + genre[key] + "</td><td>" + min + ":" + rem + "</td><td>" + rate + "</td></tr>");
+              $("#table").append("<tr><td>" + key + "</td><td>" + genreName + "</td><td>" + genre[key] + "問</td><td>" + min + "分" + rem + "秒</td><td>" + rate + "%</td></tr>");
             })
 
         }
@@ -308,7 +308,28 @@ $(function () {
 
   calendar.render();
 
-  //検索ボックス
+
+});
+
+
+
+
+//カレンダーに解いた問題数を表示
+function getEventDatas(playDays) {
+  var eventsDates = [];
+  for (let key in playDays) {
+    var datas =
+    {
+      title: playDays[key] + "問",
+      start: key
+    };
+    eventsDates.push(datas)
+  }
+  return eventsDates;
+
+}
+
+//検索ボックス
 $(function () {
   searchWord = function () {
     var searchText = $(this).val(), // 検索ボックスに入力された値
@@ -332,27 +353,4 @@ $(function () {
 
   };
 });
-
-
-
-});
-
-
-
-
-//カレンダーに解いた問題数を表示
-function getEventDatas(playDays) {
-  var eventsDates = [];
-  for (let key in playDays) {
-    var datas =
-    {
-      title: playDays[key] + "問",
-      start: key
-    };
-    eventsDates.push(datas)
-  }
-  return eventsDates;
-
-}
-
 
